@@ -55,12 +55,12 @@ namespace _03_Clases
                     view6.Visible = false;
                     break; 
                 case 3:
-                view1.Visible = false;
-                view2.Visible = false;
-                view3.Visible = true;
-                view4.Visible = false;
-                view5.Visible = false;
-                view6.Visible = false;
+                    view1.Visible = false;
+                    view2.Visible = false;
+                    view3.Visible = true;
+                    view4.Visible = false;
+                    view5.Visible = false;
+                    view6.Visible = false;
                     break;
                 case 4:
                     view1.Visible = false;

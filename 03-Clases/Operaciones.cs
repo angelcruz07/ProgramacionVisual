@@ -8,8 +8,6 @@ namespace _03_Clases
 {
     internal class Operaciones
     {
-
-
         public int aleatrorio(int min, int max)
         {
             Random r = new Random();
