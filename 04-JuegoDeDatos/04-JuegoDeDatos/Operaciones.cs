@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace _04_JuegoDeDatos
 {
-    internal class Character
+    internal class Operaciones
     {
-        public int Score(int lastPoints, int newPoints )
+        public int aleatrorio(int min, int max)
         {
-            return lastPoints += newPoints;
+            Random r = new Random();
+            return r.Next(min, max);
         }
     }
 }

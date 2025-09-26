@@ -4,14 +4,12 @@ namespace _04_JuegoDeDatos
 {
     public partial class PlayView : Form
     {
-        Character player1 = new Character();
-        Character player2 = new Character();
-        Play play = new Play();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Game game = new Game();
 
-        int scorePlayer1 = 0;
-        int scorePlayer2 = 0;
+        // Estado inicial de juego
         int currentPlayer = 1;
-
         int throwsPlayer1 = 0;
         int throwsPlayer2 = 0;
         const int maxThrows = 3;
@@ -23,7 +21,7 @@ namespace _04_JuegoDeDatos
 
         private void PlayView_Load(object sender, EventArgs e)
         {
-            Face1.Visible = false;
+            Face1.Visible = true;
             Face2.Visible = false;
             Face3.Visible = false;
             Face4.Visible = false;
@@ -38,7 +36,7 @@ namespace _04_JuegoDeDatos
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int diceRoll = play.ThrowDiceRandon(1, 7);
+            int diceRoll = game.ThrowDiceRandon(1, 7);
             ShowDiceFace(diceRoll);
         }
 
@@ -50,59 +48,53 @@ namespace _04_JuegoDeDatos
 
             if (currentPlayer == 1)
             {
-                scorePlayer1 = player1.Score(scorePlayer1, currentRoll);
+                player1.AddPoints(currentRoll);
                 throwsPlayer1++;
-                UpdatePlayerUI(ScorePlayer1, currentRoll, "lblScorePlayer1", throwsPlayer1);
+
+                UpdatePlayerUI(Score1, currentRoll, labelScore1, throwsPlayer1, player1.Score.ToString());
 
                 if (throwsPlayer1 < maxThrows)
                 {
                     currentPlayer = 2; // Pasa el turno al jugador 2
+                    lblTurno.Text = $"Turno del jugador {currentPlayer}";
                 }
-
             }
             else // currentPlayer == 2
             {
-                scorePlayer2 = player2.Score(scorePlayer2, currentRoll);
+                player2.AddPoints(currentRoll);
                 throwsPlayer2++;
-                UpdatePlayerUI(ScorePlayer2, currentRoll, "lblScorePlayer2", throwsPlayer2);
+
+                UpdatePlayerUI(Score2, currentRoll, labelScore2, throwsPlayer2, player2.Score.ToString());
 
                 if (throwsPlayer2 < maxThrows)
                 {
                     currentPlayer = 1;
+                    lblTurno.Text = $"Turno del jugador {currentPlayer}";
                 }
             }
 
 
             if (throwsPlayer1 == maxThrows && throwsPlayer2 == maxThrows)
             {
-                EndGame(scorePlayer1, scorePlayer2);
-
+                EndGame(player1.Score, player2.Score);
+                
             }
-            else
-            {
-                if (currentPlayer == 1 && throwsPlayer1 == maxThrows)
-                {
-                    // Pasa el turno al jugador 2 si el jugador 1 ya terminó
-                    currentPlayer = 2;
-                }
-                else if (currentPlayer == 2 && throwsPlayer2 == maxThrows)
-                {
-                    // Pasa el turno al jugador 1 si el jugador 2 ya terminó
-                    currentPlayer = 1;
-                }
 
-                // Muestra de quién es el turno
-                lblTurno.Text = $"Turno del jugador {currentPlayer}";
-            }
+            currentPlayer = (currentPlayer == 1 && throwsPlayer1 == maxThrows) ? 2 : 1;
 
         }
 
         // Helper method to update the UI
-        private void UpdatePlayerUI(ListView scoreListView, int currentRoll, string totalScoreLabelName, int throwsCount)
+
+
+
+
+        private static void UpdatePlayerUI(ListBox scoreListView, int currentRoll, Label totalScoreLabelName, int throwsCount, string score)
         {
-            // Add the current roll value to the ListView
-            scoreListView.Items.Add(new ListViewItem($"Lanzamiento {throwsCount}: {currentRoll}"));
+            scoreListView.Items.Add($"Lanzamiento {throwsCount}: {currentRoll}");
+            totalScoreLabelName.Text = $"Puntuación total: {score}";     
         }
+
 
         private void ShowDiceFace(int diceValue)
         {
@@ -144,13 +136,22 @@ namespace _04_JuegoDeDatos
 
             MessageBox.Show(winnerMessage, "Fin del Juego");
 
-            // Limpiar la interfaz
-            ScorePlayer2.Clear();
-            ScorePlayer1.Clear();
-            scorePlayer2 = 0;
-            scorePlayer1 = 0;
+            // Limpiar la puntuacion
+            Score1.Items.Clear();
+            Score2.Items.Clear();
+
+            player1.ResetScore();
+            player2.ResetScore();
+
+            labelScore1.Text = "Puntuacion: 0";
+            labelScore2.Text = "Puntuacion: 0";
+
+            // Resetear los lanzamientos
             throwsPlayer1 = 0;
             throwsPlayer2 = 0;
+            currentPlayer = 1;
+
+            lblTurno.Text = $"Turno del jugador {currentPlayer}";
         }
     }
 }
