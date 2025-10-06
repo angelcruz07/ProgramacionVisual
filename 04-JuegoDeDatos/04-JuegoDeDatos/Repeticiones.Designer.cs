@@ -34,6 +34,7 @@
             cboEstructura = new ComboBox();
             lstTablas = new ListBox();
             label2 = new Label();
+            label3 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -47,7 +48,7 @@
             // 
             // btnRepetir
             // 
-            btnRepetir.Location = new Point(224, 265);
+            btnRepetir.Location = new Point(195, 239);
             btnRepetir.Name = "btnRepetir";
             btnRepetir.Size = new Size(94, 29);
             btnRepetir.TabIndex = 2;
@@ -59,7 +60,7 @@
             // 
             txtTabla.Location = new Point(195, 197);
             txtTabla.Name = "txtTabla";
-            txtTabla.Size = new Size(165, 27);
+            txtTabla.Size = new Size(199, 27);
             txtTabla.TabIndex = 3;
             // 
             // cboEstructura
@@ -75,7 +76,7 @@
             // lstTablas
             // 
             lstTablas.FormattingEnabled = true;
-            lstTablas.Location = new Point(444, 136);
+            lstTablas.Location = new Point(439, 136);
             lstTablas.Name = "lstTablas";
             lstTablas.Size = new Size(150, 204);
             lstTablas.TabIndex = 5;
@@ -83,17 +84,28 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(195, 102);
+            label2.Location = new Point(195, 103);
             label2.Name = "label2";
-            label2.Size = new Size(57, 20);
+            label2.Size = new Size(158, 20);
             label2.TabIndex = 6;
-            label2.Text = "# Tabla";
+            label2.Text = "Selecione la estructura";
+            label2.Click += label2_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(312, 56);
+            label3.Name = "label3";
+            label3.Size = new Size(166, 20);
+            label3.TabIndex = 7;
+            label3.Text = "Estructura de repetición";
             // 
             // Repeticiones
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(lstTablas);
             Controls.Add(cboEstructura);
@@ -114,5 +126,6 @@
         private ComboBox cboEstructura;
         private ListBox lstTablas;
         private Label label2;
+        private Label label3;
     }
 }

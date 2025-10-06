@@ -51,7 +51,8 @@ namespace _04_JuegoDeDatos
         private void RWhile(int tabla)
         {
             int contador = 1;
-            while (contador <= 10) {
+            while (contador <= 10)
+            {
                 lstTablas.Items.Add(tabla + " x " + contador + " = " + (tabla * contador));
                 contador++;
             }
@@ -59,18 +60,25 @@ namespace _04_JuegoDeDatos
 
         private void RDoWhile(int tabla)
         {
-           int contador = 1;
-           do {
+            int contador = 1;
+            do
+            {
                 lstTablas.Items.Add(tabla + " x " + contador + " = " + (tabla * contador));
                 contador++;
-           } while (contador <= 10);
+            } while (contador <= 10);
         }
 
         private void RFor(int tabla)
         {
-            for (int contador = 1; contador <= 10; contador++) {
+            for (int contador = 1; contador <= 10; contador++)
+            {
                 lstTablas.Items.Add(tabla + " x " + contador + " = " + (tabla * contador));
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
